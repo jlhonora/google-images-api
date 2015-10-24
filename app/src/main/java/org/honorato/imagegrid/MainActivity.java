@@ -41,6 +41,10 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
 
+    public static final String KEY_URLS = "urls";
+    public static final String KEY_NEXT_PAGE = "next_page";
+    public static final String KEY_QUERY = "query";
+
     @Bind(R.id.grid)
     GridView mGrid;
 
@@ -55,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * List of image urls being shown
      */
-    List<String> mUrls;
+    ArrayList<String> mUrls;
 
     /**
      * Current query
@@ -210,5 +214,27 @@ public class MainActivity extends AppCompatActivity {
      */
     protected void setLoader(boolean isLoading) {
         mLoading.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle saveInstanceState) {
+        saveInstanceState.putString(KEY_QUERY, mQuery);
+        saveInstanceState.putStringArrayList(KEY_URLS, mUrls);
+        saveInstanceState.putString(KEY_NEXT_PAGE, mNextPage);
+
+        super.onSaveInstanceState(saveInstanceState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle saveInstanceState) {
+        if (saveInstanceState.containsKey(KEY_QUERY)) {
+            mQuery = saveInstanceState.getString(KEY_QUERY);
+        }
+        if (saveInstanceState.containsKey(KEY_URLS)) {
+            mUrls = saveInstanceState.getStringArrayList(KEY_URLS);
+        }
+        if (saveInstanceState.containsKey(KEY_NEXT_PAGE)) {
+            mNextPage = saveInstanceState.getString(KEY_NEXT_PAGE);
+        }
     }
 }
