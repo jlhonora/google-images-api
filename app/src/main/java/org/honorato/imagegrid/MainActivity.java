@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         mIsFetching = false;
+        super.onPause();
     }
 
     @Override
