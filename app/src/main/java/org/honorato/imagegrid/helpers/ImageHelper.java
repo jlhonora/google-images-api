@@ -23,7 +23,7 @@ public class ImageHelper {
      * @return
      */
     public static List<String> getUrlsFromApiResult(JsonObject result) {
-        if (result == null) {
+        if (result == null || !result.has("responseData") || !result.get("responseData").getAsJsonObject().has("results")) {
             return new ArrayList<>();
         }
         JsonArray resultsArray = result

@@ -78,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Handle search intent
         handleIntent(getIntent());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
 
         // Setup layout components
         setupGrid();
